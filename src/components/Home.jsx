@@ -42,12 +42,10 @@ const Home = () => {
 
   useEffect(() => {
     if (location.state) {
-      setMessages([
-        {
-          text: location.state,
-          sender: messages.length % 2 === 0 ? "You" : "Perplexity", // Alternate between two persons
-        },
-      ]);
+      messages.push({
+        text: location.state,
+        sender: "You", // Alternate between two persons
+      });
 
       getAiResponse();
     }
