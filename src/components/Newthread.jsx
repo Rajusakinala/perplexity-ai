@@ -33,6 +33,7 @@ const NewTrhead = () => {
       >
         <Box sx={{ display: "flex", alignItems: "center", width: "100%" }}>
           <TextField
+            autoFocus
             fullWidth
             variant="outlined"
             placeholder="Type your prompt..."

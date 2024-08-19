@@ -48,6 +48,8 @@ const Home = () => {
           sender: messages.length % 2 === 0 ? "You" : "Perplexity", // Alternate between two persons
         },
       ]);
+
+      getAiResponse();
     }
   }, []);
 
