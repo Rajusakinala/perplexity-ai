@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/no-unknown-property */
 import {
   Box,
   Button,
@@ -25,7 +23,7 @@ import Home from "./Home";
 import Newthread from "./Newthread";
 
 function LayOut() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [expand, setExpand] = useState(true);
   // const [newThreadOpen, setnewThreadOpen] = useState(true);
   const [sidebarItems, setsidebarItems] = useState([
@@ -84,7 +82,12 @@ function LayOut() {
             justifyContent: "space-between",
           }}
         >
-          <div>
+          <div
+            onClick={() => {
+              navigate("/");
+              location.reload();
+            }}
+          >
             {expand && (
               <svg
                 width="158"
@@ -95,8 +98,8 @@ function LayOut() {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M101.008 42L190.99 124.905V124.886V42.1913H208.506V125.276L298.891 42V136.524H336V272.866H299.005V357.035L208.506 277.525V357.948H190.99V278.836L101.11 358V272.866H64V136.524H101.008V42ZM177.785 153.826H81.5159V255.564H101.088V223.472L177.785 153.826ZM118.625 231.149V319.392L190.99 255.655V165.421L118.625 231.149ZM209.01 254.812V165.336L281.396 231.068V272.866H281.489V318.491L209.01 254.812ZM299.005 255.564H318.484V153.826H222.932L299.005 222.751V255.564ZM281.375 136.524V81.7983L221.977 136.524H281.375ZM177.921 136.524H118.524V81.7983L177.921 136.524Z"
                   fill="black"
                 />
@@ -139,7 +142,7 @@ function LayOut() {
                 size="small"
                 sx={{ my: 2, py: 0 }}
                 onClick={() => {
-                  // navigate("/new-thread");
+                  navigate("/new-thread");
                 }}
               >
                 <AddRoundedIcon />
@@ -211,12 +214,12 @@ function LayOut() {
         }}
       >
         <div>
-          <Router>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/new-thread" element={<Newthread />} />
-            </Routes>
-          </Router>
+          {/* <Router> */}
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/new-thread" element={<Newthread />} />
+          </Routes>
+          {/* </Router> */}
         </div>
       </div>
     </div>

@@ -2,16 +2,16 @@ import {} from "@mui/material";
 import { TextField, IconButton, Box } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const NewTrhead = () => {
-  const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([]);
+  const navigate = useNavigate();
+  const [prompt, setPrompt] = useState("");
+  //   const [messages, setMessages] = useState([]);
 
   const handleSendMessage = () => {
-    if (message.trim() !== "") {
-      setMessages([...messages, message]);
-      setMessage(""); // Clear the input field
-    }
+    navigate("/", { state: prompt });
   };
+
   return (
     <div
       style={{
@@ -35,9 +35,9 @@ const NewTrhead = () => {
           <TextField
             fullWidth
             variant="outlined"
-            placeholder="Type your message..."
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Type your prompt..."
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
             onKeyPress={(e) => {
               if (e.key === "Enter") {
                 handleSendMessage();

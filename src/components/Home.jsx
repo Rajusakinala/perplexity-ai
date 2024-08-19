@@ -1,21 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TextField, IconButton, Box, Paper, Typography } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
+import { useLocation } from "react-router-dom";
 
 const Home = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const location = useLocation();
+  //   console.log("location.state", location);
 
   const handleSendMessage = () => {
+    console.log("prompt");
+
     if (message.trim() !== "") {
       const newMessage = {
         text: message,
-        sender: messages.length % 2 === 0 ? "Person 1" : "Person 2", // Alternate between two persons
+        // sender: messages.length % 2 === 0 ? "You" : "Perplexity", // Alternate between two persons
+        sender: "You", // Alternate between two persons
       };
-      setMessages([...messages, newMessage]);
+      messages.push(newMessage);
       setMessage("");
+
+      getAiResponse();
+      console.log("messages", messages);
     }
   };
+
+  const getAiResponse = () => {
+    console.log("getAiResponse");
+
+    setTimeout(() => {
+      const newAiMsg = {
+        text: "This is Response from AI",
+        sender: "Perplexity",
+      };
+      setMessages([...messages, newAiMsg]);
+    }, 1000);
+
+    console.log("messages", messages);
+  };
+
+  useEffect(() => {
+    if (location.state) {
+      setMessages([
+        {
+          text: location.state,
+          sender: messages.length % 2 === 0 ? "You" : "Perplexity", // Alternate between two persons
+        },
+      ]);
+    }
+  }, []);
 
   return (
     <Box
@@ -40,15 +74,13 @@ const Home = () => {
             key={index}
             sx={{
               display: "flex",
-              justifyContent:
-                msg.sender === "Person 1" ? "flex-start" : "flex-end",
+              justifyContent: msg.sender === "You" ? "flex-start" : "flex-end",
               marginBottom: 1,
             }}
           >
             <Box
               sx={{
-                backgroundColor:
-                  msg.sender === "Person 1" ? "#e0f7fa" : "#c8e6c9",
+                backgroundColor: msg.sender === "You" ? "#e0f7fa" : "#c8e6c9",
                 borderRadius: 2,
                 padding: 1,
                 maxWidth: "70%",
